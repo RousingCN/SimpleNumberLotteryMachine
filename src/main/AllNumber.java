@@ -8,6 +8,7 @@ import java.util.Random;
 public class AllNumber {
 
     public AllNumber() {
+        //如果当前已切换至模式二，同时尚未从文件里读取到数据
         if (Setting.model == 2 && !Setting.loadSuccess) {
             loadNumber();
         }
