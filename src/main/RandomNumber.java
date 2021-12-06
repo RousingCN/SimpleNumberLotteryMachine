@@ -1,6 +1,5 @@
 package main;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,29 +12,29 @@ public class RandomNumber implements ActionListener,Runnable {
     JPanel titlePanel = new JPanel();
     JPanel numShowPanel = new JPanel(new BorderLayout());
     JPanel buttonPanel = new JPanel(new BorderLayout());
-    JLabel title = new JLabel("³é ½± »ú", JLabel.CENTER);
+    JLabel title = new JLabel("æŠ½ å¥– æœº", JLabel.CENTER);
     JLabel numberText = new JLabel("000000", JLabel.CENTER);
-    public static JButton btnOk = new JButton("¿ª Ê¼");
-    JButton btnShow = new JButton("²é¿´»ñ½±Ãûµ¥");
-    JButton btnSwitch = new JButton("ÇĞ»»ÖÁÄ£Ê½¶ş");
-
-    ShowResult showResult;
+    public static JButton btnOk = new JButton("å¼€ å§‹");
+    JButton btnShow = new JButton("æŸ¥çœ‹è·å¥–åå•");
+    JButton btnSwitch = new JButton("åˆ‡æ¢è‡³æ¨¡å¼äºŒ");
+    //ä¿å­˜å¯¹ShowResultç±»çš„å¼•ç”¨
+    public static ShowResult showResult;
     /**
-     * Í¼ĞÎ½çÃæ
+     * ç•Œé¢
      */
     public RandomNumber() {
-        JFrame f = new JFrame("ºÅÂë³é½±»ú");
+        JFrame f = new JFrame("å·ç æŠ½å¥–æœº");
         f.setVisible(true);
         f.setSize(500, 300);
-        //Ê¹´°¿Ú¾ÓÖĞÏÔÊ¾
+        //ä½¿çª—å£å±…ä¸­æ˜¾ç¤º
         f.setLocation(Setting.toolkit.setCentered(f));
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        //Ê¹ÓÃ×Ô¶¨Òå×ÖÌå£¬ÏÂÍ¬
+        //ä½¿ç”¨è‡ªå®šä¹‰å­—ä½“ï¼Œä¸‹åŒ
         title.setFont(Setting.toolkit.setTextFont(20));
-        //µ÷Õû×ÖÌåÑÕÉ«
+        //è°ƒæ•´å­—ä½“é¢œè‰²
         title.setForeground(Color.white);
         numberText.setFont(Setting.toolkit.setNumberFont(30));
-        //°´Å¥¡°Í¸Ã÷»¯¡±ÉèÖÃ
+        //æŒ‰é’®â€œé€æ˜åŒ–â€è®¾ç½®
         btnOk.setContentAreaFilled(false);
         btnOk.setFocusPainted(false);
         btnOk.setFont(Setting.toolkit.setTextFont(18));
@@ -66,50 +65,53 @@ public class RandomNumber implements ActionListener,Runnable {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnOk) {
-            //µã»÷µÄÊÇ¡°¿ªÊ¼¡±°´Å¥
+            //ç‚¹å‡»çš„æ˜¯â€œå¼€å§‹â€æŒ‰é’®
             if (!Setting.endRandom) {
-                //ÉèÖÃÁíÒ»ÌõÏß³Ì
+                //è®¾ç½®å¦ä¸€æ¡çº¿ç¨‹
                 Setting.startRandom = true;
                 Thread t = new Thread(this);
                 t.start();
-                //½«°´Å¥ĞŞ¸ÄÎª¡°½áÊø¡±°´Å¥
-                btnOk.setText("½á Êø");
+                //å°†æŒ‰é’®ä¿®æ”¹ä¸ºâ€œç»“æŸâ€æŒ‰é’®
+                btnOk.setText("ç»“ æŸ");
                 Setting.endRandom = true;
-                //ÉèÖÃ¿ªÊ¼Ëæ»ú³éÈ¡ºÅÂëÊ±²»ÄÜ°´ÆäËû°´Å¥
+                //è®¾ç½®å¼€å§‹éšæœºæŠ½å–å·ç æ—¶ä¸èƒ½æŒ‰å…¶ä»–æŒ‰é’®
                 btnSwitch.setEnabled(false);
                 btnShow.setEnabled(false);
             }
-            //µã»÷µÄÊÇ¡°½áÊø¡±°´Å¥
+            //ç‚¹å‡»çš„æ˜¯â€œç»“æŸâ€æŒ‰é’®
             else {
-                //Ê¹Ïß³ÌÄÚµÄÑ­»·½áÊø£¬µ¼ÖÂÏß³Ì½áÊø
+                //ä½¿çº¿ç¨‹å†…çš„å¾ªç¯ç»“æŸï¼Œå¯¼è‡´çº¿ç¨‹ç»“æŸ
                 Setting.startRandom = false;
-                //½«°´Å¥ĞŞ¸ÄÎª¡°¿ªÊ¼¡±°´Å¥
-                btnOk.setText("¿ª Ê¼");
+                //å°†æŒ‰é’®ä¿®æ”¹ä¸ºâ€œå¼€å§‹â€æŒ‰é’®
+                btnOk.setText("å¼€ å§‹");
                 Setting.endRandom = false;
-                //ÉèÖÃ½áÊøËæ»ú³éÈ¡ºÅÂëºóÆôÓÃÆäËû°´Å¥
+                //è®¾ç½®ç»“æŸéšæœºæŠ½å–å·ç åå¯ç”¨å…¶ä»–æŒ‰é’®
                 btnSwitch.setEnabled(true);
                 btnShow.setEnabled(true);
             }
         } else if (e.getSource() == btnShow) {
-            //µã»÷µÄÊÇ¡°²é¿´»ñ½±Ãûµ¥¡±°´Å¥
+            //ç‚¹å‡»çš„æ˜¯â€œæŸ¥çœ‹è·å¥–åå•â€æŒ‰é’®
             if (Data.allWinner.size() != 0) {
-                //´ò¿ª¡±»ñ½±ÕßÃûµ¥¡°½çÃæ
-                new ShowResult();
+                //èšç„¦â€è·å¥–è€…åå•â€œç•Œé¢ï¼Œå¦‚æœæ²¡æœ‰ç•Œé¢å°±ç”Ÿæˆä¸€ä¸ª
+                if (showResult == null) {
+                    showResult = new ShowResult();
+                }
+                showResult.update();
             } else {
-                JOptionPane.showMessageDialog(null, "ÇëÏÈ³éÈ¡ÖÁÉÙÒ»¸ö»ñ½±ÕßºÅÂë£¡", "Ã»ÓĞ»ñ½±Õß", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "è¯·å…ˆæŠ½å–è‡³å°‘ä¸€ä¸ªè·å¥–è€…å·ç ï¼", "æ²¡æœ‰è·å¥–è€…", JOptionPane.WARNING_MESSAGE);
             }
         } else if (e.getSource() == btnSwitch) {
-            //µã»÷µÄÊÇ¡°ÇĞ»»Ä£Ê½¡±°´Å¥
-            //µ±Ç°Ä£Ê½ÎªÄ£Ê½Ò»
+            //ç‚¹å‡»çš„æ˜¯â€œåˆ‡æ¢æ¨¡å¼â€æŒ‰é’®
+            //å½“å‰æ¨¡å¼ä¸ºæ¨¡å¼ä¸€
             if (Setting.model == 1) {
                 Setting.model = 2;
-                btnSwitch.setText("ÇĞ»»ÖÁÄ£Ê½Ò»");
+                btnSwitch.setText("åˆ‡æ¢è‡³æ¨¡å¼ä¸€");
                 btnSwitch.setBackground(new Color(140, 132, 132));
             }
-            //µ±Ç°Ä£Ê½ÎªÄ£Ê½¶ş
+            //å½“å‰æ¨¡å¼ä¸ºæ¨¡å¼äºŒ
             else if (Setting.model == 2) {
                 Setting.model = 1;
-                btnSwitch.setText("ÇĞ»»ÖÁÄ£Ê½¶ş");
+                btnSwitch.setText("åˆ‡æ¢è‡³æ¨¡å¼äºŒ");
                 btnSwitch.setBackground(new Color(154, 161, 151));
             }
         }
@@ -117,11 +119,11 @@ public class RandomNumber implements ActionListener,Runnable {
     @Override
     public void run() {
         AllNumber allNumber = new AllNumber();
-        //Í¨¹ıstartRandomÀ´ÉèÖÃºÎÊ±½áÊøÑ­»·
+        //é€šè¿‡startRandomæ¥è®¾ç½®ä½•æ—¶ç»“æŸå¾ªç¯
         while (Setting.startRandom) {
-            //»ñÈ¡Ëæ»úÊıÎÄ±¾
+            //è·å–éšæœºæ•°æ–‡æœ¬
             Data.winnerNumber = allNumber.getNumberText(6);
-            //ÖØĞÂÉèÖÃ½çÃæÉÏÏÔÊ¾µÄÊı×Ö
+            //é‡æ–°è®¾ç½®ç•Œé¢ä¸Šæ˜¾ç¤ºçš„æ•°å­—
             numberText.setText(Data.winnerNumber);
             try {
                 Thread.sleep(50);
@@ -129,7 +131,7 @@ public class RandomNumber implements ActionListener,Runnable {
                 e.printStackTrace();
             }
         }
-        //±£´æ»ñ½±Õß±àºÅ
+        //ä¿å­˜è·å¥–è€…ç¼–å·
         Data.allWinner.add(Data.winnerNumber);
 
     }
