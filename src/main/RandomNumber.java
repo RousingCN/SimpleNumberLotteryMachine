@@ -19,7 +19,7 @@ public class RandomNumber implements ActionListener,Runnable {
     JButton btnShow = new JButton("查看获奖名单");
     JButton btnSwitch = new JButton("切换至模式二");
 
-
+    ShowResult showResult;
     /**
      * 图形界面
      */
@@ -94,7 +94,7 @@ public class RandomNumber implements ActionListener,Runnable {
             //点击的是“查看获奖名单”按钮
             if (Data.allWinner.size() != 0) {
                 //打开”获奖者名单“界面
-                new ShowResult(Data.allWinner);
+                new ShowResult();
             } else {
                 JOptionPane.showMessageDialog(null, "请先抽取至少一个获奖者号码！", "没有获奖者", JOptionPane.WARNING_MESSAGE);
             }
